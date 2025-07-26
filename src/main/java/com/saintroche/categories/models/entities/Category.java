@@ -12,7 +12,8 @@ public class Category {
     private Long id;
     private String name;
     private String description;
-    @Column(name = "creation_date", nullable = false, updatable = false)
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime creationDate;
 
     public Category() {}
@@ -23,7 +24,7 @@ public class Category {
     }
 
     @PrePersist
-    public void prePersist() {
+    public void onCreate() {
         this.creationDate = LocalDateTime.now();
     }
 

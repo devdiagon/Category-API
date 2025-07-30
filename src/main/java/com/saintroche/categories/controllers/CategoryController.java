@@ -2,6 +2,7 @@ package com.saintroche.categories.controllers;
 
 import com.saintroche.categories.models.entities.Category;
 import com.saintroche.categories.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,13 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createCategory(@RequestBody Category category){
+    public ResponseEntity<?> createCategory(@Valid @RequestBody Category category){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(categoryService.createCategory(category));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category c){
+    public ResponseEntity<Category> update(@Valid @PathVariable Long id, @RequestBody Category c){
         try {
             return ResponseEntity.ok(categoryService.updateCategory(id, c));
         } catch (RuntimeException e) {
